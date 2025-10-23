@@ -1,0 +1,17 @@
+# Archivos y carpetas de compilación
+/target/
+/out/
+/bin/
+
+# Configuración de IDEs
+.idea/
+.vscode/
+*.iml
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos temporales
+*.log
+*.tmp
