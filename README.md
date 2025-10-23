@@ -40,28 +40,28 @@ test/
     ```java
     public class Conversor implements LanzarComando {
 
-        private static final String MSG_SCS = "Comando ejecutado";
-        private static final String MSG_ERR = "Se necesita al menos dos URL para ejecutar";
-        private static final int NUM_URL = 2;
+    private static final String MSG_SCS = "Comando ejectuado";
+    private static final String MSG_ERR = "Se necesita al menos dos URL para ejecutar";
+    private static final int NUM_URL = 2;
 
-        @Override
-        public void ejecutar(String comando, String[] urls) throws IOException, InterruptedException {
-            if (urls == null || urls.length < NUM_URL) {
-                System.out.println(MSG_ERR);
-                return;
-            }
-
-            List<String> cmd = new ArrayList<>();
-            cmd.add(comando);
-            cmd.addAll(Arrays.asList(urls));
-
-            ProcessBuilder pb = new ProcessBuilder(cmd);
-            Process proceso = pb.start();
-            proceso.waitFor();
-
-            System.out.println(MSG_SCS);
+    @Override
+    public void ejecutar(String comando, String[] urls) throws IOException, InterruptedException {
+        if (urls == null || urls.length < NUM_URL) {
+            System.out.println(MSG_ERR);
+            return;
         }
+
+        List<String> cmd = new ArrayList<>();
+        cmd.add(comando);
+        cmd.addAll(Arrays.asList(urls));
+
+        ProcessBuilder pb = new ProcessBuilder(cmd);
+        Process proceso = pb.start();
+        proceso.waitFor();
+
+        System.out.println(MSG_SCS);
     }
+}
     ```
 
 
@@ -70,19 +70,14 @@ test/
 - **3.3 Clase Main**
     ```java
     public class Main {
-        public static void main(String[] args) throws IOException, InterruptedException {
-            if (args.length < 2) {
-                System.out.println("Uso: java Main <entrada> <salida>");
-                return;
-            }
+    public static void main(String[] args) throws IOException, InterruptedException{
+        String[] urlStrings = {"src/main/resources/entrada.jpg", "src/main/resources/salida.png"};
+        String comando = "convert";
 
-            String comando = "convert"; 
-            String[] archivos = { args[0], args[1] };
-
-            Conversor conversor = new Conversor();
-            conversor.ejecutar(comando, archivos);
-        }
+        Conversor conversor = new Conversor();
+        conversor.ejecutar(comando, urlStrings);
     }
+}
     ```
 
 
